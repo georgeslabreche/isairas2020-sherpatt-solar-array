@@ -1,6 +1,8 @@
 # i-SAIRAS 2020
 Conference paper for the 2020 edition of the International Symposium on Artificial Intelligence, Robotics, and Automation in Space (i-SAIRAS).
 
+The document can be built using pdflatex with the following command: `pdflatex article.tex`.
+
 # Symposium Agenda
 The symposium will consist of oral and poster presentations:
 - **October 18:** Networking reception and poster session.
