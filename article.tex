@@ -55,12 +55,9 @@
 %   7. Mars Traverse Distance Gains Using a Rover's Active Suspension System as a 2-Axis Solar Tracker Mechanism
 \author{%
 Georges L. J. Labrèche\\
-Lorem ipsum dolor sit amet\\
-Consectetur adipiscing\\
-12345 Eiusmod, Tempor\\
 Georges.Labreche@gmail.com
 \and
-Dr. Florian Cordes\\
+Florian Cordes\\
 DFKI Robotics Innovation Center\\
 Robert-Hooke-Straße 1\\
 28359 Bremen, Germany\\
@@ -78,12 +75,13 @@ The SherpaTT rover is prepared for further autonomous long distance traverses in
 \end{abstract}
 
 
-\tableofcontents
+% Table of content is not needed.
+% \tableofcontents
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The exploration rover SherpaTT has a total mass of approximately \SI{160}{\kilo\gram} and the legs as well as the \ac{RA} weigh about \SI{25}{\kilo\gram} each. The wheeled-leg active suspension system allows the rover to assume different poses with varying inertial moments. The rover is one of many systems comprising a \ac{MRS} developed at the \ac{DFKI}'s \ac{RIC}.
+The exploration rover SherpaTT has a total mass of approximately \SI{206}{\kilo\gram} and the legs as well as the \ac{RA} weigh about \SI{25}{\kilo\gram} each. The wheeled-leg active suspension system allows the rover to assume different poses with varying inertial moments. The rover is one of many systems comprising a \ac{MRS} developed at the \ac{DFKI}'s \ac{RIC}.
 
 The rover has undergone several field trial campaigns, particularly with a Mars analogue terrain field deployment in Utah, USA, where a logistics chain for sample return was evaluated. The rover's versatility has been demonstrated through a multitude of tasks such as assembling surface deployable payloads and using its \ac{RA} for soil sampling with modular \ac{PLI} sampling devices \cite{Cordes2018b}.
 
@@ -107,11 +105,11 @@ Past research on active suspension systems are restricted to analyzing benefits 
 \section{Power Budget}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Large inclination angles are typically preferred with respect to increased insolation for a sun-facing surface. However, constraints on the rover's active suspension system imposes a limit on the achievable body pitch angle. Body pitch commands of up to \SI{10}{\degree} are experimentally evaluated during steep slope climbing in \cite{Cordes2018a}. Modeling higher pitch angles resulted in poor wheel-ground contact angle due to the \ac{WS} axis having the same tilt as the rover's body. The attainable tilt is thus restricted resulting in a maximum \ac{SA} surface inclination angle of $\beta = \SI{10}{\degree}$.
+Large inclination angles are typically preferred with respect to increased insolation for a sun-facing surface. However, constraints on the rover's active suspension system impose a limit on the achievable body pitch angle. Body pitch commands of up to \SI{10}{\degree} are experimentally evaluated during steep slope climbing in \cite{Cordes2018a}. Modeling higher pitch angles resulted in poor wheel-ground contact angle due to the \ac{WS} axis having the same tilt as the rover's body. The attainable tilt is thus restricted resulting in a maximum \ac{SA} surface inclination angle of $\beta = \SI{10}{\degree}$.
 
 \input{tables/insolation-iani-chaos-clear-and-dusty-days.tex}
 
-\refTab{tab:insolation-iani-chaos-clear-and-dusty-days} and \refTab{tab:insolation-ismenius-cavus-clear-and-dusty-days} presents the best and worst case daily insolations $H_{h}$, on horizontal \ac{SA} surface, compared to those obtained with $H_{\beta}$, on an inclined sun-facing \ac{SA} surface. Optical depths $\tau$ for clear to dusty days are evaluated with the daily insolations expressed in \si{Wh.m^{-2}} and the gains in percentage. The solar insolation values are taken from \cite{Labreche2020}.
+\refTab{tab:insolation-iani-chaos-clear-and-dusty-days} and \refTab{tab:insolation-ismenius-cavus-clear-and-dusty-days} present the best and worst case daily insolations $H_{h}$, on horizontal \ac{SA} surface, compared to those obtained with $H_{\beta}$, on an inclined sun-facing \ac{SA} surface. Optical depths $\tau$ for clear to dusty days are evaluated with the daily insolations expressed in \si{Wh.m^{-2}} and the gains in percentage. The solar insolation values are taken from \cite{Labreche2020}.
 
 \input{tables/insolation-ismenius-cavus-clear-and-dusty-days.tex}
 
@@ -122,7 +120,7 @@ As a prerequisite to \ac{SA} sizing, power budgets are defined for hibernation a
 
 \input{tables/power-budget-hibernation-sol.tex}
 
-Durations of daylight dependent modes in the traverse reference Sol are based on the total length of daylight time for worst case daily insolations Sols presented in \refTab{tab:insolation-iani-chaos-clear-and-dusty-days} and \refTab{tab:insolation-ismenius-cavus-clear-and-dusty-days} with $\tau$ factor 1 and $\beta=\SI{10}{\degree}$ for the \ac{SA} surface inclination angle. Propulsion power draws for the rover's flat terrain traverse mode is determined from data collected during the SherpaTT Utah field trial.
+Durations of daylight dependent modes in the traverse reference Sol are based on the total length of daylight time for worst case daily insolations Sols presented in \refTab{tab:insolation-iani-chaos-clear-and-dusty-days} and \refTab{tab:insolation-ismenius-cavus-clear-and-dusty-days} with $\tau$ factor 1 and $\beta=\SI{10}{\degree}$ for the \ac{SA} surface inclination angle. Propulsion power draws for the rover's flat terrain traverse mode is determined from data collected during the SherpaTT Utah field trial \cite{Cordes2018b}.
 
 \input{tables/worst-case-power-budget-flat-traverse-sol-tau-1.tex}
 
@@ -162,7 +160,7 @@ The traverse distance gains attributed to \ac{SA} inclination capabilities do no
 \end{figure}
 
 
-To explain the lack of significant gains, the generated \ac{SA} energy and maximum traverse durations is plotted in \refFig{fig:plot:ismenius-cavus-generated-energy-and-max-traverse-durations} for Ismenius Cavus. During clear days at $\tau$ factor 0.4, a ceiling is imposed on the daily maximum traverse durations due to the available daylight time for traversing. The maximum traverse time is already attained with a horizontal \ac{SA}, making an inclined \ac{SA} irrelevant in terms traverse distance gains. As seen in \refFig{fig:plot:sub:ismenius-cavus-max-traverse-durations}, the inclined \ac{SA} is only slightly advantageous during the global dust storm season with a $\tau$ factor of 1.
+To explain the lack of significant gains, the generated \ac{SA} energy and maximum traverse durations are plotted in \refFig{fig:plot:ismenius-cavus-generated-energy-and-max-traverse-durations} for Ismenius Cavus. During clear days at $\tau$ factor 0.4, a ceiling is imposed on the daily maximum traverse durations due to the available daylight time for traversing. The maximum traverse time is already attained with a horizontal \ac{SA}, making an inclined \ac{SA} irrelevant in terms traverse distance gains. As seen in \refFig{fig:plot:sub:ismenius-cavus-max-traverse-durations}, the inclined \ac{SA} is only slightly advantageous during the global dust storm season with a $\tau$ factor of 1.
 
 \begin{figure}[h]
 \captionsetup[subfigure]{justification=centering}
@@ -208,7 +206,7 @@ However, no such ceiling can be observed for Iani Chaos in \refFig{fig:plot:iani
   \label{fig:plot:iani-chaos-generated-energy-and-max-traverse-durations}
 \end{figure}
 
-To resolve this, the worst case power budget in \refTab{tab:worst-case-traverse-sol-power-budget} is set aside and the \ac{SA} sizing process is approached inversely by identifying solar cell coverage area targets based on the traverse distance gains brought about by an inclined surface. \refFig{fig:plot:flat-traverse-gains-for-different-sa-area} compares the traverse distance gains obtained with an inclined \ac{SA} surface for different solar cell coverage areas and optical depths.
+The worst case power budget in \refTab{tab:worst-case-traverse-sol-power-budget} is set aside and the \ac{SA} sizing process is approached inversely by identifying solar cell coverage area targets based on the traverse distance gains brought about by an inclined surface. \refFig{fig:plot:flat-traverse-gains-for-different-sa-area} compares the traverse distance gains obtained with an inclined \ac{SA} surface for different solar cell coverage areas and optical depths.
 
 \begin{figure}[h]
 \captionsetup[subfigure]{justification=centering}
@@ -299,7 +297,7 @@ The proposed rover and \ac{SA} configurations are modeled with Blender/Phobos an
 
 \subsection{Slope Compensation}
 
-The worst case slope traverse is an on inclined surface facing away from the sun. The rover's active suspension system can be used to reduce the \ac{SA} inclination angle by commanding a rover body pitch in the opposite direction. This slope compensation scenario is illustrated in \refFig{fig:sub:rover-on-slope-beta} where $B$ denotes the slope surface inclination angle and $\beta$ the \ac{SA} surface inclination angle.
+The worst case slope traverse is on an inclined surface facing away from the sun. The rover's active suspension system can be used to reduce the \ac{SA} inclination angle by commanding a rover body pitch in the opposite direction. This slope compensation scenario is illustrated in \refFig{fig:sub:rover-on-slope-beta} where $B$ denotes the slope surface inclination angle and $\beta$ the \ac{SA} surface inclination angle.
 
 \begin{figure}[h]
 \captionsetup[subfigure]{justification=centering}
