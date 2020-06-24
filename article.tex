@@ -12,12 +12,27 @@
 \usepackage{subcaption}   % neue subfigure-Umgebung %% should probably not be used with memoir: generates warning
 \usepackage[nolist,nohyperlinks]{acronym} % Use this for acronyms, unlisted.
 
+% URL hyperlinks in References section.
+\usepackage{hyperref}
+
+%\hypersetup{
+%  colorlinks=true,
+%  linkcolor=blue,
+%  filecolor=magenta,
+%  urlcolor=cyan,
+%}
+
+%\urlstyle{same}
+
+
 % New commands.
 \newcommand{\ignore}[1]{}                  % {} empty inside = %% comment.
 \newcommand{\refFig}[1]{{Figure}~\ref{#1}} % Command for figure reference.
 \newcommand{\refTab}[1]{{Table}~\ref{#1}}  % Command for table reference.
 
 % Renew commands.
+
+% Use alpha for footnotes.
 \renewcommand\thefootnote{{(\alph{footnote})}} % footnote formatting and colors
 
 % Define common figure sizes for subfigures -> redefined in each environment
@@ -25,6 +40,7 @@
 \setlength{\subfigureWidth}{0.24\textwidth}
 \newlength{\graphicsHeight}
 \setlength{\graphicsHeight}{25mm}
+
 
 \begin{acronym}
   \acro{DFKI}{German Research Center for Artificial Intelligence}
@@ -57,12 +73,12 @@
 Georges L. J. Labrèche\\
 Georges.Labreche@gmail.com
 \and
-Florian Cordes\\
-DFKI Robotics Innovation Center\\
-Robert-Hooke-Straße 1\\
-28359 Bremen, Germany\\
+Florian Cordes\footnote{DFKI Robotics Innovation Center, Robert-Hooke-Straße 1, 28359 Bremen, Germany.}\\
 Florian.Cordes@dfki.de
 }
+
+% Extra vertical spacing in table cells.
+%{\renewcommand{\arraystretch}{1.5}% for the vertical padding
 
 \maketitle
 
@@ -87,13 +103,20 @@ The rover has undergone several field trial campaigns, particularly with a Mars 
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=2.9in]{figures/images/sherpatt-actively-articulated-suspension-sytem.png}\\
+  \includegraphics[width=3.2in]{figures/images/sherpatt-actively-articulated-suspension-sytem.png}\\
   \caption{Description of DoF present in SherpaTT’s
 suspension system and placement of force-torque sensor}
   \label{fig:sherpatt-actively-articulated-suspension-system}
 \end{figure}
 
-The actively articulated suspension system consists of four wheeled-legs with a total of 20 motors. The distribution of motors across a single leg is shown in \refFig{fig:sherpatt-actively-articulated-suspension-system}. Each leg is equipped with three suspension motors and two drive motors. The suspension motors are responsible for Pan, \ac{IL}, and \ac{OL} revolute joint rotations whereas the drive motors are responsible for \ac{WS} and \ac{WD}.
+The actively articulated suspension system consists of four wheeled-legs with a total of 20 motors. Motor distribution across a single leg is shown in \refFig{fig:sherpatt-actively-articulated-suspension-system}. Each leg is equipped with three suspension motors and two drive motors. The suspension motors are responsible for Pan, \ac{IL}, and \ac{OL} revolute joint rotations whereas the drive motors are responsible for \ac{WS} and \ac{WD}. A first design iteration of the rover with \ac{SA} for an Ismenius Cavus deployment is shown in \refFig{fig:solar-array-on-ismenius-cavus-chaos}.
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=2.8in]{figures/images/ismenius-cavus-10deg-pitch.png}\\
+ \caption{Rover with \ac{SA} for Ismenius Cavus deployment.}
+ \label{fig:solar-array-on-ismenius-cavus-chaos}
+\end{figure}
 
 The rover has been deployed in several field experiments where it was put under test within natural and unstructured Mars analogue terrain with respect to general morphology and geology. The rover displayed the ability to cope with natural terrain and to fulfill the task of being an exploration and sampling rover. Further development is required on its electrical power subsystem if it is to operate in long term missions. This paper explores \ac{SA} configurations for the a Mars environment in order to guide future design iterations to navigate the topography of this planetary surface. The constraints imposed from the active suspension system with flexible footprints and varying heights of structural parts of the legs are considered in the design phase.
 
@@ -109,16 +132,16 @@ Large inclination angles are typically preferred with respect to increased insol
 
 \input{tables/insolation-iani-chaos-clear-and-dusty-days.tex}
 
-\refTab{tab:insolation-iani-chaos-clear-and-dusty-days} and \refTab{tab:insolation-ismenius-cavus-clear-and-dusty-days} present the best and worst case daily insolations $H_{h}$, on horizontal \ac{SA} surface, compared to those obtained with $H_{\beta}$, on an inclined sun-facing \ac{SA} surface. Optical depths $\tau$ for clear to dusty days are evaluated with the daily insolations expressed in \si{Wh.m^{-2}} and the gains in percentage. The solar insolation values are taken from \cite{Labreche2020}.
+\refTab{tab:insolation-iani-chaos-clear-and-dusty-days} and \refTab{tab:insolation-ismenius-cavus-clear-and-dusty-days} present the best and worst case daily insolations $H_{h}$, on horizontal \ac{SA} surface, compared to those obtained with $H_{\beta}$, on an inclined sun-facing \ac{SA} surface. Optical depths $\tau$ for clear to dusty days are evaluated with the daily insolations expressed in \si{Wh.m^{-2}} and the gains in percentage. The solar insolation values are taken from \cite{Labreche2020} and obtained with Mars solar radiation formulas in \cite{Appelbaum1989}, \cite{Appelbaum1990}, \cite{Appelbaum1991}, \cite{Appelbaum1993}, and \cite{Appelbaum1994}.
 
 \input{tables/insolation-ismenius-cavus-clear-and-dusty-days.tex}
 
-Gains obtained in daily insolation with an inclined surface are more pronounced for sites further away from the equator. For a typical optical depth of $\tau = 0.4$, the average daily insolation gain on the inclined surface is approximately \SI{7}{\percent} at Iani Chaos and \SI{9}{\percent} at Ismenius Cavus.
-Due to the mostly diffuse composition of solar irradiance at higher optical depths, inclined surfaces become irrelevant during global dust storms. For $\tau \geq 2$, gains in daily insolation become negligible at both sites.
-
-As a prerequisite to \ac{SA} sizing, power budgets are defined for hibernation and flat terrain traverse reference Sols. These are presented in \refTab{tab:hibernation-sol-power-budget} and \refTab{tab:worst-case-traverse-sol-power-budget}. Hibernation power draws are identical during day and nighttime so the hibernation reference Sol does not have a best or worse case Sol with respect to available sunlight.
+Daily insolation gains obtained with an inclined surface are more pronounced for sites further away from the equator. For a typical optical depth of $\tau$ factor 0.4, the average daily insolation gain on the inclined surface is approximately \SI{7}{\percent} at Iani Chaos and \SI{9}{\percent} at Ismenius Cavus.
+The mostly diffuse composition of solar irradiance at higher optical depths make inclined surfaces irrelevant in global dust storms. For $\tau \geq 2$, gains in daily insolation become negligible at both sites.
 
 \input{tables/power-budget-hibernation-sol.tex}
+
+As a prerequisite to \ac{SA} sizing, power budgets are defined for hibernation and flat terrain traverse reference Sols. These are presented in \refTab{tab:hibernation-sol-power-budget} and \refTab{tab:worst-case-traverse-sol-power-budget}. Hibernation power draws are identical during day and nighttime so the hibernation reference Sol does not have a best or worse case Sol with respect to available sunlight.
 
 Durations of daylight dependent modes in the traverse reference Sol are based on the total length of daylight time for worst case daily insolations Sols presented in \refTab{tab:insolation-iani-chaos-clear-and-dusty-days} and \refTab{tab:insolation-ismenius-cavus-clear-and-dusty-days} with $\tau$ factor 1 and $\beta=\SI{10}{\degree}$ for the \ac{SA} surface inclination angle. Propulsion power draws for the rover's flat terrain traverse mode is determined from data collected during the SherpaTT Utah field trial \cite{Cordes2018b}.
 
@@ -178,7 +201,7 @@ To explain the lack of significant gains, the generated \ac{SA} energy and maxim
     \includegraphics[height=\graphicsHeight]{figures/plots/ismeniuscavus-75w-max-traverse-durations-for-solar-cell-coverage-area-41m2.png}
     \subcaption{Maximum Traverse Durations}
     \label{fig:plot:sub:ismenius-cavus-max-traverse-durations}
-  \end{subfigure}\\[0.8ex]
+  \end{subfigure}
   \caption{Generated energy and maximum flat terrain traverse duration at Ismenius Cavus with solar cell coverage area of \SI{4.1}{m^{2}}. Surface inclination angle $\beta$ is \SI{10}{\degree}. $\tau$ factor 1 is used for global dust storm season ($\SI{185}{\degree} \leq L_{s} \leq \SI{315}{\degree}$) and 0.4 otherwise. The \textit{available daylight traverse time} corresponds to the amount of daylight hours left in a \textit{Traverse Sol} after subtracting the time taken by rover modes unrelated to traversing.}
   \label{fig:plot:ismenius-cavus-generated-energy-and-max-traverse-durations}
 \end{figure}
@@ -201,7 +224,7 @@ However, no such ceiling can be observed for Iani Chaos in \refFig{fig:plot:iani
     \includegraphics[height=\graphicsHeight]{figures/plots/ianichaos-75w-max-traverse-durations-for-solar-cell-coverage-area-23m2.png}
     \subcaption{Maximum Traverse Durations}
     \label{fig:plot:sub:iani-chaos-max-traverse-durations}
-  \end{subfigure}\\[0.8ex]
+  \end{subfigure}
   \caption{Generated energy and maximum flat terrain traverse duration at Iani Chaos with solar cell coverage area of \SI{2.3}{m^{2}}. The same considerations were taken as in \refFig{fig:plot:ismenius-cavus-generated-energy-and-max-traverse-durations}.}
   \label{fig:plot:iani-chaos-generated-energy-and-max-traverse-durations}
 \end{figure}
@@ -224,7 +247,7 @@ The worst case power budget in \refTab{tab:worst-case-traverse-sol-power-budget}
       \includegraphics[height=\graphicsHeight]{figures/plots/ismeniuscavus-75w-traverse-gains-for-different-solar-cell-coverage-areas.png}
     \subcaption{Ismenius Cavus}
     \label{fig:plot:sub:iani-chaos-flat-traverse-gains-for-different-sa-area}
-    \end{subfigure}\\[0.8ex]
+    \end{subfigure}
     \caption{Average flat terrain traverse distance gains at mission sites for different solar cell coverage areas. \ac{SA} inclination angle $\beta_{max} = \SI{10}{\degree}$ with orientation angles $\gamma_{c}$ set to their optimal values for the considered traverse Sols.}
     \label{fig:plot:flat-traverse-gains-for-different-sa-area}
 \end{figure}
@@ -248,21 +271,33 @@ Targeting a solar cell coverage area of \SI{1.5}{m^{2}} at Iani Chaos results in
     \includegraphics[height=\graphicsHeight]{figures/plots/ismeniuscavus-75w-max-traverse-durations-for-solar-cell-coverage-area-24m2.png}
     \subcaption{Ismenius Cavus, solar cell coverage area = \SI{2.4}{m^{2}}}
     \label{fig:plot:sub:final-maximum-traverse-durations-ismenius-cavus}
-  \end{subfigure}\\[0.8ex]
+  \end{subfigure}
   \caption{Maximum traverse durations at mission sites. The same considerations were taken as in \refFig{fig:plot:ismenius-cavus-generated-energy-and-max-traverse-durations}.}
   \label{fig:plot:final-maximum-traverse-durations-at-missions-sites}
 \end{figure}
 
-\ac{SA} sizing with the hibernation reference Sol power budget defined in \refTab{tab:hibernation-sol-power-budget} as the worst case power budget fails to meet the target \ac{SA} areas. However, the required power draws only differ by a few Watts. At Iani Chaos, this is achieved by reducing the hibernation mode power draws from \SI{18}{\watt} to \SI{17}{\watt}. At Ismenius Cavus, hibernation power draws need to be reduced from \SI{18}{\watt} to \SI{15}{\watt}. Taking into account a \SI{20}{\percent} system margin, the energy requirement for hibernation Sols become \SI{490}{\watt\hour} at Iani Chaos for a \SI{1.7}{m^{2}} \ac{SA} area and \SI{432}{\watt\hour} at Ismenius Cavus for a \SI{2.8}{m^{2}} \ac{SA} area. A first iteration of the rover with a \ac{SA} for an Ismenius Cavus deployment is shown in \refFig{fig:solar-array-on-ismenius-cavus-chaos}.
-
+\ac{SA} sizing with the hibernation reference Sol power budget defined in \refTab{tab:hibernation-sol-power-budget} as the worst case power budget fails to meet the target \ac{SA} areas. However, the required power draws only differ by a few Watts. At Iani Chaos, this is achieved by reducing the hibernation mode power draws from \SI{18}{\watt} to \SI{17}{\watt}. At Ismenius Cavus, hibernation power draws need to be reduced from \SI{18}{\watt} to \SI{15}{\watt}. Taking into account a \SI{20}{\percent} system margin, the energy requirement for hibernation Sols become \SI{490}{\watt\hour} at Iani Chaos for a \SI{1.7}{m^{2}} \ac{SA} area and \SI{432}{\watt\hour} at Ismenius Cavus for a \SI{2.8}{m^{2}} \ac{SA} area. \refFig{fig:rover-body-redesign} shows the rover's body redesign from a pyramid to a cubic shape in order to better accommodate the \ac{SA} surface and avoid shadowing.
 
 \begin{figure}[h]
- \centering
- \includegraphics[width=3.25in]{figures/images/ismenius-cavus-10deg-pitch.png}\\
- \caption{Rover with \ac{SA} for Ismenius Cavus deployment.}
- \label{fig:solar-array-on-ismenius-cavus-chaos}
+\captionsetup[subfigure]{justification=centering}
+  \centering
+  \setlength{\subfigureWidth}{0.24\textwidth}
+  \setlength{\graphicsHeight}{29mm}
+  \begin{subfigure}[t]{\subfigureWidth}
+    \centering
+    \includegraphics[height=\graphicsHeight]{figures/images/body-before.png}
+    \subcaption{Before}
+    \label{fig:sub:rover-body-redesign-before}
+    \end{subfigure}\hfill
+  \begin{subfigure}[t]{\subfigureWidth}
+    \centering
+    \includegraphics[height=\graphicsHeight]{figures/images/body-after.png}
+    \subcaption{After}
+    \label{fig:sub:rover-body-redesign-after}
+  \end{subfigure}
+  \caption{Rover body redesign.}
+  \label{fig:rover-body-redesign}
 \end{figure}
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -272,7 +307,7 @@ The proposed rover and \ac{SA} configurations are modeled with Blender/Phobos an
 
 \subsection{Z-Axis Revolutions}
 
-\refFig{fig:sub:simulation-data-rover-revolution-generated-power-line-chart} and \refFig{fig:sub:simulation-data-rover-revolution-generated-power-polar-chart} are two different representations of the same solar power output obtained from commanding the rover to execute a \SI{10}{\degree} forward body-pitch followed by several revolutions around its z-axis. These revolutions result in a sinusoidal power output variation. Local spikes and dips are noted around \SI{100}{\second} and \SI{160}{\second} due to small changes in the \ac{SA} inclination and orientation angles caused by the rover driving over uneven terrain. In \refFig{fig:sub:simulation-data-rover-revolution-generated-power-polar-chart}, the angle values represent the direction faced by the inclined \ac{SA}. Maximum power is generated when the \ac{SA} is oriented southwards, towards the equator, in the general direction of the sun. Inversely, facing northwards, away from the sun, generates the least amount of power.
+\refFig{fig:sub:simulation-data-rover-revolution-generated-power-line-chart} and \refFig{fig:sub:simulation-data-rover-revolution-generated-power-polar-chart} are two different representations of the same solar power output obtained from commanding the rover to execute a \SI{10}{\degree} forward body-pitch followed by several revolutions around its z-axis. These revolutions result in a sinusoidal power output variation. Local spikes and dips are noted around \SI{100}{\second} and \SI{160}{\second} due to small changes in the \ac{SA} inclination and orientation angles caused by the rover driving over uneven terrain. In \refFig{fig:sub:simulation-data-rover-revolution-generated-power-polar-chart}, the angle values represent the direction faced by the inclined \ac{SA}. Maximum power is generated when the \ac{SA} is oriented southwards, towards the equator, in the general direction of the sun. Inversely, facing northwards, away from the sun, generates the least amount of power. These are the expected results thus validating the simulation environment for further development and mission scenario analysis.
 
 \begin{figure}[h]
   \captionsetup[subfigure]{justification=centering}
@@ -313,7 +348,7 @@ The worst case slope traverse is on an inclined surface facing away from the sun
     \includegraphics[height=\graphicsHeight]{figures/images/stick-rover-beta-small.png}
     \subcaption{$\beta < B$}
     \label{fig:sub:rover-on-slope-beta-small}
-  \end{subfigure}\\[0.8ex]
+  \end{subfigure}
   \caption{Slope compensation with active suspension system to reduce the \ac{SA} surface inclination angle. Slope inclination angle $B = \SI{30}{\degree}$. In (a), $\beta = B = \SI{30}{\degree}$. In (b), the rover is tilted \SI{10}{\degree} in the opposite direction of the slope so that $\beta = \SI{20}{\degree}$.}
   \label{fig:sub:rover-on-slope-beta}
 \end{figure}
@@ -347,6 +382,9 @@ This paper presents an active suspension system use case that goes beyond negoti
   \item [(8)] Exploring other alternative use cases for the rover's active suspension system such as nighttime star tracking for astronomical observations with a mounted telescope.
 \end{itemize}
 
+At the time of writing this paper, work is already being done in (5) as part of the ADE (OG10) project for autonomous decision making in very long traverses 
+\cite{ADEOG10}.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliographystyle{IEEEtran}
@@ -354,19 +392,37 @@ This paper presents an active suspension system use case that goes beyond negoti
 \begin{thebibliography}{1}
 
 \bibitem{Cordes2018a}
-Cordes, F. Design and Experimental Evaluation of a Hybrid Wheeled-Leg Exploration Rover in the Context of Multi-Robot Systems. PhD thesis, University of Bremen. 2018, https://doi.org/10.13140/RG.2.2.24973.79843
+Cordes, F. Design and Experimental Evaluation of a Hybrid Wheeled-Leg Exploration Rover in the Context of Multi-Robot Systems. PhD thesis, University of Bremen. 2018, \url{https://doi.org/10.13140/RG.2.2.24973.79843}
 
 \bibitem{Cordes2018b}
-Cordes, F, Kirchner, F, Babu, A. Design and field testing of a rover with an actively articulated suspension system in a Mars analog terrain. J Field Robotics. 2018; 35: 1149– 1181. https://doi.org/10.1002/rob.21808
+Cordes, F, Kirchner, F, Babu, A. Design and field testing of a rover with an actively articulated suspension system in a Mars analog terrain. Journal of Field Robotics. 2018; 35: 1149– 1181. \url{https://doi.org/10.1002/rob.21808}
 
 \bibitem{Labreche2020}
-Labrèche, G. Exploiting the SherpaTT Rover Active Suspension System to Enable Optimal Solar Array Inclination and Orientation for Long Traverses in a Martian Environment. 2020, http://urn.kb.se/resolve?urn=urn:nbn:se:ltu:diva-78016
+Labrèche, G. Exploiting the SherpaTT Rover Active Suspension System to Enable Optimal Solar Array Inclination and Orientation for Long Traverses in a Martian Environment. 2020, \url{http://urn.kb.se/resolve?urn=urn:nbn:se:ltu:diva-78016}
+
+\bibitem{Appelbaum1989}
+Appelbaum, J, Flood, D. Solar Radiation on Mars. NASA-TM-102299. 1989, \url{https://ntrs.nasa.gov/?R=19890018252}
+
+\bibitem{Appelbaum1990}
+Appelbaum, J, Flood, D. Solar radiation on Mars: Update 1990. NASA-TM-103623. 1990, \url{https://ntrs.nasa.gov/?R=19910005804}
+
+\bibitem{Appelbaum1991}
+Appelbaum, J, Flood, D. Solar radiation on Mars: Update 1991. NASA-TM-105216. 1991, \url{https://ntrs.nasa.gov/?R=19910023732}
+
+\bibitem{Appelbaum1993}
+Appelbaum, J, Sherman, I, Landis, G. A. Solar radiation on Mars: Stationary photovoltaic array. NASA-TM-106321. 1993, \url{https://ntrs.nasa.gov/?R=19940010257}
+
+\bibitem{Appelbaum1994}
+Appelbaum, J, Flood, D, Norambuena, M. Solar radiation on Mars: Tracking photovoltaic array. NASA-TM-106700. 1994, \url{https://ntrs.nasa.gov/?R=19950004977}
 
 \bibitem{Phobos}
-DFKI/RIC, Phobos. https://github.com/dfki-ric/phobos. Accessed on: Jun. 12, 2020.
+DFKI/RIC, Phobos. \url{https://github.com/dfki-ric/phobos}. Accessed on: Jun. 12, 2020.
 
 \bibitem{MARSSim}
-DFKI/RIC, MARS - Machina Arte Robotum Simulans. https://robotik.dfki-bremen.de/en/research/softwaretools/mars.html. Accessed on: Jun. 12, 2020.
+DFKI/RIC, MARS - Machina Arte Robotum Simulans. \url{https://robotik.dfki-bremen.de/en/research/softwaretools/mars.html}. Accessed on: Jun. 12, 2020.
+
+\bibitem{ADEOG10}
+DFKI/RIC, ADE (OG10) - Autonomous Decision Making in Very Long Traverses. \url{https://robotik.dfki-bremen.de/en/research/projects/ade-og10.html}. Accessed on: Jun. 23, 2020.
 
 \end{thebibliography}
 
